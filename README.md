@@ -30,7 +30,7 @@ The custom kernel is competitive with cuSPARSE on graph-like sparsity
 (`delaunay_n24`, within 1% at $k = 256$) and falls behind most on the structurally
 banded `Cube_Coup_dt0`, where cuSPARSE benefits from L2 reuse that the simple
 warp-split-k strategy does not exploit. Both kernels operate well below the A100's
-19.5 TFLOPS FP32 peak — SpMM is fundamentally memory-bandwidth-bound, since each
+19.5 TFLOPS FP32 peak. SpMM is fundamentally memory-bandwidth-bound, since each
 fused multiply-add requires loading a fresh `A` value and an `X` element from
 global memory.
 
@@ -164,19 +164,6 @@ into `matrices/`:
 
 The two arguments are the path to a `.mtx` file and the value of $k$.
 
-### Run the full benchmark on Perlmutter
-
-`run.sh` is a SLURM batch script that runs all six (matrix, $k$) configurations
-on a single A100 node:
-
-```bash
-sbatch run.sh
-```
-
-The submission requests a single GPU on an `hbm40g` node and loads
-`cudatoolkit/12.9` automatically. Adjust the `-A` account flag to match your
-allocation.
-
 ## Project layout
 
 ```
@@ -210,4 +197,4 @@ $$
 
 where $u$ is the float32 unit roundoff. This is the standard componentwise bound
 for inner-product–based matrix multiplication and gives a tight, sparsity-aware
-tolerance — much more meaningful than a flat absolute or relative threshold.
+tolerance. much more meaningful than a flat absolute or relative threshold.
