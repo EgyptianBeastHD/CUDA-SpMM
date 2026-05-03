@@ -211,8 +211,3 @@ $$
 where $u$ is the float32 unit roundoff. This is the standard componentwise bound
 for inner-product–based matrix multiplication and gives a tight, sparsity-aware
 tolerance — much more meaningful than a flat absolute or relative threshold.
-
-## License
-
-No license file is currently included; add one (e.g. MIT or Apache 2.0) before
-publishing if you want to permit reuse.
